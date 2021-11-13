@@ -1,0 +1,59 @@
+
+Console.WriteLine("Employee Time Keeping System");
+Console.WriteLine($"Today's Date:  {DateTime.Today.ToShortDateString()}");
+
+Console.Write("To log your time-in enter your employee id:");
+string employeeId = Console.ReadLine();
+TimeSpan timeIn = new TimeSpan(8, 40, 0);
+Console.WriteLine($"Your login time is recorded: {timeIn}");
+
+
+Console.WriteLine("*********************************");
+
+Console.Write("To log your time-out enter your employee id:");
+employeeId = Console.ReadLine();
+TimeSpan timeOut = new TimeSpan(17, 30, 0);
+Console.WriteLine($"Your logout time is recorded: {timeOut}");
+
+Console.WriteLine("*********************************");
+
+TimeSpan lunchBreakDuration = new TimeSpan(1, 0, 0);
+TimeSpan totalHours = (timeOut - timeIn) - lunchBreakDuration;
+Console.WriteLine($"Yout total hours worked is: {totalHours}");
+
+TimeSpan regularHoursStart = new TimeSpan(8, 0, 0);
+TimeSpan regularHoursEnd = new TimeSpan(17, 0, 0);
+TimeSpan graceTimeIn = new TimeSpan(8, 30, 0);
+TimeSpan lateIn = new TimeSpan(0, 0, 0);
+TimeSpan earlyOut = new TimeSpan(0, 0, 0);
+TimeSpan latetime = new TimeSpan(0, 0, 0);
+String employeestatus = " ";
+
+
+if (timeIn > regularHoursStart)
+{
+    lateIn = timeIn - regularHoursStart;
+    if (timeIn >= graceTimeIn)
+    {
+        employeestatus = "Late";
+        latetime = timeIn - regularHoursStart;
+    }
+
+    else
+    {
+        employeestatus = "Good";
+    }
+
+}
+if (timeOut < regularHoursEnd)
+{
+    earlyOut = timeOut - regularHoursEnd;
+}
+
+TimeSpan totalRegularHours = totalHours - (lateIn + earlyOut);
+Console.WriteLine($"Your total regular hours worked is: {totalRegularHours}");
+Console.WriteLine($"Your Time in status is: {employeestatus}");
+Console.WriteLine($"Your total hours late is: {latetime}");
+
+
+
